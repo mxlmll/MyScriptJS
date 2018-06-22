@@ -20,7 +20,7 @@ function checkTextNonText(browser, resultSelector) {
     browser.waitForElementPresent(resultSelector, 6000 * globalconfig.timeoutAmplificator);
   }
   browser.getExports(function (res) {
-    console.log('export res: ' + JSON.stringify(res.value));
+    //console.log('export res: ' + JSON.stringify(res.value));
     const parsedjiix = JSON.parse(res.value);
 
     browser.verify.equal(parsedjiix.type, "Raw Content");
@@ -43,7 +43,7 @@ function checkTextNonText(browser, resultSelector) {
 
 function getStrokesFromJIIX(jiix) {
   var strokesList = common.findValuesByKey(jiix, 'strokes')
-  console.log('strokes= ' + JSON.stringify(strokesList));
+  //console.log('strokes= ' + JSON.stringify(strokesList));
   return strokesList;
 }
 
