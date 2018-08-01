@@ -204,7 +204,7 @@ function checkSmartGuide(browser, config, strokes, labels, component = '#editor'
     //.waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
     .waitUntilElementPropertyEqual('#editorSupervisor', 'state', 'EXPORTED', 3000 * globalconfig.timeoutAmplificator)
     .waitForElementVisible('.smartguide', 1000 * globalconfig.timeoutAmplificator)
-    .waitForIdle('#editorSupervisor', 3000 * globalconfig.timeoutAmplificator);
+    .pause(20000);
 
   browser.getAttribute('.smartguide', 'id', (res) => {
     const randomString = res.value.replace('smartguide', '');
@@ -257,8 +257,7 @@ function checkUndoRedoReconnect(browser, config, strokes, labels, component = '#
     .playStrokes(component, strokes, 100, 100, 3000 * globalconfig.timeoutAmplificator)
     //.waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
     .waitUntilElementPropertyEqual('#editorSupervisor', 'state', 'EXPORTED', 3000 * globalconfig.timeoutAmplificator)
-    .waitForIdle('#editorSupervisor', 3000 * globalconfig.timeoutAmplificator);
-
+    .pause(20000);
   checkNbStrokes(browser, config, resultSelector, 'nbstrokes', strokes.length);
   checkLabel(browser, labels, strokes.length - 1, resultSelector, emptyResultSelector);
 
