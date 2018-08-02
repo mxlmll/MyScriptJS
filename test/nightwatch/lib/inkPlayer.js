@@ -256,7 +256,7 @@ function checkUndoRedoReconnect(browser, config, strokes, labels, component = '#
   console.log('strokes nb = ' + strokes.length);
   browser
     .playStrokes(component, strokes, 100, 100, 3000 * globalconfig.timeoutAmplificator)
-    //.waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
+    .waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
     .waitUntilElementPropertyEqual('#editorSupervisor', 'state', 'EXPORTED', 3000 * globalconfig.timeoutAmplificator);
 
   checkNbStrokes(browser, config, resultSelector, 'nbstrokes', strokes.length);
