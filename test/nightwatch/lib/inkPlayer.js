@@ -245,6 +245,7 @@ function checkSmartGuide(browser, config, strokes, labels, component = '#editor'
 
 function checkUndoRedoReconnect(browser, config, strokes, labels, component = '#editor', resultSelector = '#editorSupervisor', emptyResultSelector = '#editorSupervisor') {
   const isWebSocketV4 = (config.apiVersion === 'V4' && config.protocol !== 'REST');
+  console.log('url ' +  browser.launchUrl + config.componentPath)
   browser
     .init(browser.launchUrl + config.componentPath).maximizeWindow()
     .waitForElementVisible(component, 1000 * globalconfig.timeoutAmplificator)
@@ -252,6 +253,7 @@ function checkUndoRedoReconnect(browser, config, strokes, labels, component = '#
     .waitForElementPresent('#editorSupervisor', 1000 * globalconfig.timeoutAmplificator)
     .waitUntilElementPropertyEqual('#editorSupervisor', 'unloaded', false, 3000 * globalconfig.timeoutAmplificator);
 
+  console.log('strokes nb = ' + strokes.length);
   browser
     .playStrokes(component, strokes, 100, 100, 3000 * globalconfig.timeoutAmplificator)
     //.waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
