@@ -25,7 +25,6 @@ exports.command = function playStrokes(element, strokes, offsetX, offsetY, timeo
 
   function playStrokesFunction(client, done) {
     strokes.forEach(stroke => playStroke(stroke, client));
-    client.pause(3000);
     client.waitForIdle('#editorSupervisor', timeoutRef, done);
   }
 

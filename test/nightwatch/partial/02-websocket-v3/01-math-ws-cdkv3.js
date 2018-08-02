@@ -13,10 +13,10 @@ function runUndoTests(ink) {
   };
 }
 
-// config.inks
-//   .filter(ink => ['equation'].includes(ink.name))
-//   .forEach(ink => runLabelTests(ink));
-//
-// config.inks
-//   .filter(ink => ['one', 'equation3'].includes(ink.name))
-//   .forEach(ink => runUndoTests(ink));
+config.inks
+  .filter(ink => ['equation'].includes(ink.name))
+  .forEach(ink => runLabelTests(ink));
+
+config.inks
+  .filter(ink => ['one', 'equation3'].includes(ink.name))
+  .forEach(ink => runUndoTests(ink));
