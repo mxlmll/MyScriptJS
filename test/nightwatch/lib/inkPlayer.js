@@ -51,7 +51,7 @@ function checkNbStrokes(browser, config, resultSelector, property, nbStrokesExpe
   const isWebSocketV4 = (config.apiVersion === 'V4' && config.protocol !== 'REST');
   if(isWebSocketV4) {
     browser.getExports(function (res) {
-      //console.log('export= ' + JSON.stringify(res.value));
+      console.log('export= ' + JSON.stringify(res.value));
       browser.verify.equal(getStrokesFromJIIX(res.value).length, String(nbStrokesExpected));
     })
   }
@@ -256,7 +256,7 @@ function checkUndoRedoReconnect(browser, config, strokes, labels, component = '#
   console.log('strokes nb = ' + strokes.length);
   browser
     .playStrokes(component, strokes, 100, 100, 3000 * globalconfig.timeoutAmplificator)
-    .waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
+    //.waitUntilElementPropertyEqual('#editorSupervisor', 'nbstrokes', strokes.length, 3000 * globalconfig.timeoutAmplificator)
     .waitUntilElementPropertyEqual('#editorSupervisor', 'state', 'EXPORTED', 3000 * globalconfig.timeoutAmplificator);
 
   checkNbStrokes(browser, config, resultSelector, 'nbstrokes', strokes.length);
