@@ -11,6 +11,6 @@ function runInkTests(ink) {
   };
 }
 
-config.inks
-  .filter(ink => ['hello'].includes(ink.name))
-  .forEach(ink => runInkTests(ink));
+// config.inks
+//   .filter(ink => ['hello'].includes(ink.name))
+//   .forEach(ink => runInkTests(ink));

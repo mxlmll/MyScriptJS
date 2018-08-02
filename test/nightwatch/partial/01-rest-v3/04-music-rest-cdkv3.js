@@ -7,6 +7,6 @@ function runInkTests(ink) {
   };
 }
 
-config.inks
-  .filter(ink => ['music'].includes(ink.name))
-  .forEach(ink => runInkTests(ink));
+// config.inks
+//   .filter(ink => ['music'].includes(ink.name))
+//   .forEach(ink => runInkTests(ink));
