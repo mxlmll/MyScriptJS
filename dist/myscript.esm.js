@@ -102,9 +102,7 @@ var loglevel = createCommonjsModule(function (module) {
 * Licensed under the MIT license.
 */
 (function (root, definition) {
-    if (typeof undefined === 'function' && undefined.amd) {
-        undefined(definition);
-    } else if (module.exports) {
+    if (module.exports) {
         module.exports = definition();
     } else {
         root.log = definition();
@@ -876,7 +874,7 @@ function overrideDefaultConfiguration(configuration) {
 }
 
 var jsoncss_min = createCommonjsModule(function (module, exports) {
-!function(t,e){module.exports=e();}(commonjsGlobal,function(){return function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o});},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=1)}([function(t,e,n){function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function t(e){var n=this;o(this,t),this.toJSON=function(t){if("string"!=typeof t)return console.error("Need a CSS string but given ",void 0===t?"undefined":r(t),t),"Not a valid CSS..!";var e={},o=void 0,i=void 0,u=void 0;try{t.split("{").forEach(function(t){if(i=t.trim())if(-1===i.indexOf("}"))e[i]={},o=i;else{i.substring(0,i.indexOf("}")).split(";").forEach(function(t){(u=t.split(":"))&&2===u.length&&(e[o][u[0].trim().replace(/^\"|\"$/g,"")]=n._trimSemiColon(u[1].trim().replace(/^\"|\"$/g,"")));});try{o=i.split("}")[1].trim(),o&&(e[o]={});}catch(t){}}});}catch(t){return"Not a valid CSS..!"}return e},this.toCSS=function(t){if("object"!==(void 0===t?"undefined":r(t)))return console.error("Need a JSON object but given ",void 0===t?"undefined":r(t),t),"Not a valid JSON..!";var e="";try{for(var n in t)if(t.hasOwnProperty(n)){e+=n+" {\n";for(var o in t[n])t[n].hasOwnProperty(o)&&(e+=o+": "+t[n][o]+";\n");e+="}\n";}}catch(t){return"Not a valid JSON..!"}return e},this._trimSemiColon=function(t){return";"===t.slice(-1)?t.slice(0,n.length-1):t};};e.default=i;},function(t,e,n){t.exports=n(0).default;}])});
+!function(t,e){module.exports=e();}(commonjsGlobal,function(){return function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o});},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=1)}([function(t,e,n){function o(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function t(e){var n=this;o(this,t),this.toJSON=function(t){if("string"!=typeof t)return console.error("Need a CSS string but given ",void 0===t?"undefined":r(t),t),"Not a valid CSS..!";var e={},o=void 0,i=void 0,u=void 0;try{t.split("{").forEach(function(t){if(i=t.trim())if(-1===i.indexOf("}"))e[i]={},o=i;else{i.substring(0,i.indexOf("}")).split(";").forEach(function(t){(u=t.split(":"))&&2===u.length&&(e[o][u[0].trim().replace(/^\"|\"$/g,"")]=n._trimSemiColon(u[1].trim().replace(/^\"|\"$/g,"")));});try{o=i.split("}")[1].trim(),o&&(e[o]={});}catch(t){}}});}catch(t){return "Not a valid CSS..!"}return e},this.toCSS=function(t){if("object"!==(void 0===t?"undefined":r(t)))return console.error("Need a JSON object but given ",void 0===t?"undefined":r(t),t),"Not a valid JSON..!";var e="";try{for(var n in t)if(t.hasOwnProperty(n)){e+=n+" {\n";for(var o in t[n])t[n].hasOwnProperty(o)&&(e+=o+": "+t[n][o]+";\n");e+="}\n";}}catch(t){return "Not a valid JSON..!"}return e},this._trimSemiColon=function(t){return ";"===t.slice(-1)?t.slice(0,n.length-1):t};};e.default=i;},function(t,e,n){t.exports=n(0).default;}])});
 });
 
 var JsonCSS = unwrapExports(jsoncss_min);
@@ -1138,10 +1136,18 @@ function attach(element, editor) {
     var smartGuideIds = ['smartguide', 'prompter-text-container', 'prompter-text', 'tag-icon', 'ellipsis'];
     var scrollbarClasses = ['ps__rail-x', 'ps__thumb-x'];
     // Check if pointer entered into any smartguide elements or scrollbar
+    // Use case : when the pointer is entering the smartguide or scrollbar, a pointerout (or leave) is fired.
+    // The related target is then the DOM element that was left.
+    // We don't want this to cause editor.pointerUp because the stroke isn't finished.
     var pointerEnteredSmartGuide = evt.relatedTarget && (smartGuideIds.includes(evt.relatedTarget.className) || scrollbarClasses.includes(evt.relatedTarget.className));
     // Check if pointer didn't stay in the smartguide and pointer exited the smartguide or scrollbar
+    // Use case : when the pointer is leaving the smartguide or scrollbar, a pointerout (or leave) is fired.
+    // The related target is then the DOM element that was left (the smart guide)
+    // We are entering again the editor
+    // We don't want this to cause editor.pointerUp because the stroke isn't finished.
     var pointerExitedSmartGuide = evt.relatedTarget && evt.target && (smartGuideIds.includes(evt.target.className) || scrollbarClasses.includes(evt.target.className));
     // Check if pointer moved between words in smartguide
+    // Same use case as pointerEnteredSmartGuide but for the words in the smartguide (each word is a span).
     var pointerMovedWords = evt.relatedTarget && evt.target && (evt.target.tagName === 'SPAN' || evt.relatedTarget.tagName === 'SPAN');
     if (pointerEnteredSmartGuide || pointerExitedSmartGuide || pointerMovedWords) {
       evt.stopPropagation();
@@ -2203,6 +2209,17 @@ function resetModelPositions(model) {
 }
 
 /**
+ * Reset model lastRenderedPosition
+ * @param {Model} model
+ * @return {Model}
+ */
+function resetModelRendererPosition(model) {
+  var modelReference = model;
+  modelReference.lastPositions.lastRenderedPosition = -1;
+  return modelReference;
+}
+
+/**
  * Update model lastRenderedPosition
  * @param {Model} model
  * @param {Number} [position]
@@ -2268,6 +2285,28 @@ function mergeModels() {
     return modelRef;
   });
 }
+
+var InkModel = /*#__PURE__*/Object.freeze({
+  createModel: createModel,
+  clearModel: clearModel,
+  needRedraw: needRedraw,
+  addStroke: addStroke,
+  addStrokeToGroup: addStrokeToGroup,
+  extractPendingStrokes: extractPendingStrokes,
+  initPendingStroke: initPendingStroke,
+  appendToPendingStroke: appendToPendingStroke,
+  endPendingStroke: endPendingStroke,
+  getBorderCoordinates: getBorderCoordinates,
+  extractStrokesFromInkRange: extractStrokesFromInkRange,
+  updateModelSentPosition: updateModelSentPosition,
+  updateModelReceivedPosition: updateModelReceivedPosition,
+  resetModelPositions: resetModelPositions,
+  resetModelRendererPosition: resetModelRendererPosition,
+  updateModelRenderedPosition: updateModelRenderedPosition,
+  extractPendingRecognizedSymbols: extractPendingRecognizedSymbols,
+  cloneModel: cloneModel,
+  mergeModels: mergeModels
+});
 
 /**
  * Renderer info
@@ -5644,6 +5683,17 @@ var LOST_CONNEXION_MESSAGE = { type: 'LOST_CONNECTION' };
  */
 var CLOSE_RECOGNIZER_MESSAGE = 'CLOSE_RECOGNIZER';
 
+var RecognizerContext = /*#__PURE__*/Object.freeze({
+  createEmptyRecognizerContext: createEmptyRecognizerContext,
+  isResetRequired: isResetRequired,
+  updateRecognitionPositions: updateRecognitionPositions,
+  setRecognitionContext: setRecognitionContext,
+  canReconnect: canReconnect,
+  shouldAttemptImmediateReconnect: shouldAttemptImmediateReconnect,
+  LOST_CONNEXION_MESSAGE: LOST_CONNEXION_MESSAGE,
+  CLOSE_RECOGNIZER_MESSAGE: CLOSE_RECOGNIZER_MESSAGE
+});
+
 /**
  * @param {String} suffixUrl
  * @param {RecognizerContext} recognizerContext
@@ -6587,8 +6637,8 @@ function buildData(recognizerContext, model, conversionState) {
     xDPI: 96,
     yDPI: 96,
     contentType: contentType,
-    height: recognizerContext.editor.domElement.clientHeight,
-    width: recognizerContext.editor.domElement.clientWidth,
+    // height: recognizerContext.editor.domElement.clientHeight,
+    // width: recognizerContext.editor.domElement.clientWidth,
     theme: toCSS$1(recognizerContext.editor.theme),
     strokeGroups: newStrokes
   };
@@ -6650,19 +6700,26 @@ function resultCallback$5(model, configuration, res, mimeType, callback) {
  * @param {RecognizerContext} recognizerContext Current recognizer context
  * @param {Model} model Current model
  * @param {RecognizerCallback} callback
+ * @param {Array[String]} requestedMimeTypes
  */
-function export_$5(recognizerContext, model, callback) {
+function export_$5(recognizerContext, model, callback, requestedMimeTypes) {
   var configuration = recognizerContext.editor.configuration;
 
   function callPostMessage(mimeType) {
     postMessage$1('/api/v4.0/iink/batch', recognizerContext, model, buildData, configuration.restConversionState, mimeType).then(function (res) {
-      return resultCallback$5(model, configuration, res, mimeType, callback);
+      console.log('res', res);
+      resultCallback$5(model, configuration, res, mimeType, callback);
     }).catch(function (err) {
-      return callback(err, model);
+      console.log(err);
+      callback(err, model);
     });
   }
 
-  if (configuration.recognitionParams.type === 'TEXT') {
+  if (requestedMimeTypes) {
+    requestedMimeTypes.forEach(function (mimeType) {
+      callPostMessage(mimeType);
+    });
+  } else if (configuration.recognitionParams.type === 'TEXT') {
     configuration.recognitionParams.v4.text.mimeTypes.forEach(function (mimeType) {
       callPostMessage(mimeType);
     });
@@ -7084,7 +7141,7 @@ var mathWebSocketV3Configuration = {
  * Get the configuration supported by this recognizer
  * @return {RecognizerInfo}
  */
-function getInfo$10() {
+function getInfo$a() {
   return mathWebSocketV3Configuration;
 }
 
@@ -7218,7 +7275,7 @@ var Cdkv3WSMathRecognizer = /*#__PURE__*/Object.freeze({
   export_: export_$6,
   reset: reset$2,
   mathWebSocketV3Configuration: mathWebSocketV3Configuration,
-  getInfo: getInfo$10,
+  getInfo: getInfo$a,
   clear: clear$3,
   close: close$2
 });
@@ -7240,7 +7297,7 @@ var textWebSocketV3Configuration = {
  * Get the configuration supported by this recognizer
  * @return {RecognizerInfo}
  */
-function getInfo$11() {
+function getInfo$b() {
   return textWebSocketV3Configuration;
 }
 
@@ -7379,7 +7436,7 @@ var Cdkv3WSTextRecognizer = /*#__PURE__*/Object.freeze({
   export_: export_$7,
   reset: reset$3,
   textWebSocketV3Configuration: textWebSocketV3Configuration,
-  getInfo: getInfo$11,
+  getInfo: getInfo$b,
   clear: clear$4,
   close: close$2
 });
@@ -7816,7 +7873,7 @@ var IInkWebSocketV4Configuration = {
  * Get the configuration supported by this recognizer
  * @return {RecognizerInfo}
  */
-function getInfo$12() {
+function getInfo$c() {
   return IInkWebSocketV4Configuration;
 }
 
@@ -8430,7 +8487,7 @@ var Cdkv4WSInteractiveRecognizer = /*#__PURE__*/Object.freeze({
   setPenStyleClasses: setPenStyleClasses,
   setTheme: setTheme,
   IInkWebSocketV4Configuration: IInkWebSocketV4Configuration,
-  getInfo: getInfo$12,
+  getInfo: getInfo$c,
   buildNewContentPackageInput: buildNewContentPackageInput,
   buildRestoreIInkSessionInput: buildRestoreIInkSessionInput,
   buildNewContentPart: buildNewContentPart,
@@ -10111,9 +10168,7 @@ var select_1 = select$1;
 
 var clipboardAction = createCommonjsModule(function (module, exports) {
 (function (global, factory) {
-    if (typeof undefined === "function" && undefined.amd) {
-        undefined(['module', 'select'], factory);
-    } else {
+    {
         factory(module, select_1);
     }
 })(commonjsGlobal, function (module, _select) {
@@ -10630,9 +10685,7 @@ var listen_1 = listen;
 
 var clipboard = createCommonjsModule(function (module, exports) {
 (function (global, factory) {
-    if (typeof undefined === "function" && undefined.amd) {
-        undefined(['module', './clipboard-action', 'tiny-emitter', 'good-listener'], factory);
-    } else {
+    {
         factory(module, clipboardAction, tinyEmitter, listen_1);
     }
 })(commonjsGlobal, function (module, _clipboardAction, _tinyEmitter, _goodListener) {
@@ -11619,11 +11672,17 @@ function recognizerCallback(editor, error, model) {
       if (err.type !== 'close') {
         editorLogger.error('Error while firing the recognition', err.stack || err); // Handle any error from all above steps
       }
-      if (err.message === 'Invalid application key.' || err.message === 'Invalid HMAC' || err.error && err.error.result && err.error.result.error && (err.error.result.error === 'InvalidApplicationKeyException' || err.error.result.error === 'InvalidHMACSignatureException')) {
+      if (
+      // IInk error managment before refactor
+      err.message === 'Invalid application key.' || err.message === 'Invalid HMAC' ||
+      // CDK error managment
+      err.error && err.error.result && err.error.result.error && (err.error.result.error === 'InvalidApplicationKeyException' || err.error.result.error === 'InvalidHMACSignatureException') ||
+      // IInk error managment after refactor
+      err.code && err.code === 'access.not.granted') {
         editorRef.error.innerText = Constants.Error.WRONG_CREDENTIALS;
-      } else if (err.message === 'Session is too old. Max Session Duration Reached') {
+      } else if (err.message === 'Session is too old. Max Session Duration Reached' || err.code && err.code === 'session.too.old') {
         editorRef.error.innerText = Constants.Error.TOO_OLD;
-      } else if (err.message && editorRef.error.style.display === 'none') {
+      } else if ((err.message || err.code) && editorRef.error.style.display === 'none') {
         editorRef.error.innerText = Constants.Error.NOT_REACHABLE;
       }
       if ((editorRef.error.innerText === Constants.Error.TOO_OLD || err.code === 1006 || err.reason === 'CLOSE_RECOGNIZER') && canReconnect(editor.recognizerContext)) {
@@ -12314,6 +12373,22 @@ var Editor = function () {
       };
     }
 
+    /**
+     * Detach event listeners from the DOM element created at editor creation.
+     */
+
+  }, {
+    key: 'unload',
+    value: function unload() {
+      if (this.grabber) {
+        // Remove event handlers to avoid multiplication (detach grabber)
+        this.grabber.detach(this.domElement, this.grabberContext);
+      }
+      if (this.innerRenderer) {
+        this.innerRenderer.detach(this.domElement, this.rendererContext);
+      }
+    }
+
     /* eslint-disable class-methods-use-this */
     /**
      * Get access to some easter egg features link ink injection. Use at your own risk (less tested and may be removed without notice).
@@ -12767,9 +12842,12 @@ var MyScript = {
   DefaultPenStyle: defaultPenStyle,
   DefaultTheme: defaultTheme,
   register: register,
-  getAvailableLanguageList: getAvailableLanguageList
+  getAvailableLanguageList: getAvailableLanguageList,
+  DefaultBehaviors: defaultBehaviors,
+  InkModel: InkModel,
+  RecognizerContext: RecognizerContext
 };
 
 export default MyScript;
-export { Constants, log as LoggerConfig, Editor, defaultConfiguration as DefaultConfiguration, defaultPenStyle as DefaultPenStyle, defaultTheme as DefaultTheme, register, getAvailableLanguageList };
+export { Constants, log as LoggerConfig, Editor, defaultConfiguration as DefaultConfiguration, defaultPenStyle as DefaultPenStyle, defaultTheme as DefaultTheme, register, getAvailableLanguageList, defaultBehaviors as DefaultBehaviors, InkModel, RecognizerContext };
 //# sourceMappingURL=myscript.esm.js.map

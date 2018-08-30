@@ -1051,6 +1051,18 @@ export class Editor {
     };
   }
 
+  /**
+   * Detach event listeners from the DOM element created at editor creation.
+   */
+  unload() {
+    if (this.grabber) { // Remove event handlers to avoid multiplication (detach grabber)
+      this.grabber.detach(this.domElement, this.grabberContext);
+    }
+    if (this.innerRenderer) {
+      this.innerRenderer.detach(this.domElement, this.rendererContext);
+    }
+  }
+
   /* eslint-disable class-methods-use-this */
   /**
    * Get access to some easter egg features link ink injection. Use at your own risk (less tested and may be removed without notice).
