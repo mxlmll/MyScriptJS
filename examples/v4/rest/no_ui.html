@@ -21,6 +21,7 @@
       display: flex;
       flex-direction: row;
     }
+
     #rawStrokesT, #result {
       min-height: 95vh;
       max-height: 95vh;
@@ -35,6 +36,25 @@
       width: 125px;
       height: 35px;
     }
+    #result {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    #interpretatedTextContent {
+      max-height: 50%;
+    }
+    #interpretatedImageContent {
+      max-width: 100%;
+      max-height: 50%;
+    }
+
+    #interpretatedImageContent > img {
+      max-width: 100%;
+    }
+
+
   </style>
 </head>
 
@@ -76,9 +96,22 @@
   </textarea>
 
 </div>
-<div id="result"></div>
+<div id="result">
+  <div id='interpretatedTextContent' ></div>
+  <div id='interpretatedImageContent' ></div>
+
+</div>
 <button id="recognize" class="btn">Recognize</button>
 <script>
+  const convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {
+    const reader = new FileReader;
+    reader.onerror = reject;
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.readAsDataURL(blob);
+  });
+
   document.querySelector('#recognize')
     .addEventListener('click', () => {
 
@@ -97,7 +130,10 @@
       const recognizerContext = MyScript.RecognizerContext.createEmptyRecognizerContext({
         configuration: MyScript.DefaultConfiguration
       });
+      //const mimeType = 'application/vnd.myscript.jiix';
+      const requestedMimeType = ['text/plain', 'image/png'];
       recognizerContext.editor.configuration.recognitionParams.protocol = 'REST';
+      recognizerContext.editor.configuration.recognitionParams.v4.text.mimeTypes = requestedMimeType;
       recognizerContext.editor.configuration.recognitionParams.server = {
         scheme: 'https',
         host: 'webdemoapi.myscript.com',
@@ -110,7 +146,22 @@
 
       // Defining the behaviour on recognition result
       const recognitionCallback = (err, x) => {
-        document.querySelector('#result').innerHTML = x.exports["text/plain"];
+        if (!err) {
+          Object.entries(x.exports)
+            .forEach(([mimeType, exportValue]) => {
+              if (mimeType.startsWith('image/')) {
+                convertBlobToBase64(exportValue)
+                  .then(b64 => {
+                    document.querySelector('#interpretatedImageContent').innerHTML = "<img>";
+                    document.querySelector('#interpretatedImageContent > img').src = b64;
+                  });
+
+
+              } else {
+                document.querySelector('#interpretatedTextContent').innerHTML = JSON.stringify(x.exports[mimeType]);
+              }
+            });
+        }
       };
 
       // Triggering the recognition

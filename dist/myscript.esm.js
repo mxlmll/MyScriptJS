@@ -5486,7 +5486,8 @@ function xhr(type, url, data) {
       request.setRequestHeader('Content-Type', 'application/json');
     }
 
-    if (mimeType === pptxMimeType) {
+    var isBlobType = mimeType === pptxMimeType || mimeType.startsWith('image/');
+    if (isBlobType) {
       request.responseType = 'blob';
     }
 
@@ -5496,7 +5497,7 @@ function xhr(type, url, data) {
 
     request.onload = function () {
       if (request.status >= 200 && request.status < 300) {
-        mimeType === pptxMimeType ? resolve(request.response) : resolve(parse(request));
+        isBlobType ? resolve(request.response) : resolve(parse(request));
       } else {
         reject(new Error(request.responseText));
       }
@@ -5505,7 +5506,7 @@ function xhr(type, url, data) {
     request.onreadystatechange = function () {
       if (request.readyState === 4) {
         if (request.status >= 200 && request.status < 300) {
-          mimeType === pptxMimeType ? resolve(request.response) : resolve(parse(request));
+          isBlobType ? resolve(request.response) : resolve(parse(request));
         }
       }
     };
@@ -6637,11 +6638,14 @@ function buildData(recognizerContext, model, conversionState) {
     xDPI: 96,
     yDPI: 96,
     contentType: contentType,
-    // height: recognizerContext.editor.domElement.clientHeight,
-    // width: recognizerContext.editor.domElement.clientWidth,
     theme: toCSS$1(recognizerContext.editor.theme),
     strokeGroups: newStrokes
   };
+
+  if (recognizerContext.editor.domElement) {
+    data.height = recognizerContext.editor.domElement.clientHeight;
+    data.width = recognizerContext.editor.domElement.clientWidth;
+  }
 
   if (conversionState) {
     data.conversionState = 'DIGITAL_EDIT';
@@ -6653,32 +6657,7 @@ function buildData(recognizerContext, model, conversionState) {
 
 function extractExports$4(configuration, mimeType, res) {
   var exports = {};
-  if (mimeType === 'application/vnd.myscript.jiix') {
-    exports['application/vnd.myscript.jiix'] = res;
-  }
-  if (configuration.recognitionParams.type === 'TEXT' && mimeType === 'text/plain') {
-    exports['text/plain'] = res;
-  } else if (configuration.recognitionParams.type === 'DIAGRAM') {
-    if (mimeType === 'image/svg+xml') {
-      exports['image/svg+xml'] = res;
-    }
-    if (mimeType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
-      exports['application/vnd.openxmlformats-officedocument.presentationml.presentation'] = res;
-    }
-    if (mimeType === 'application/vnd.microsoft.art-gvml-clipformat') {
-      exports['application/vnd.microsoft.art-gvml-clipformat'] = res;
-    }
-  } else if (configuration.recognitionParams.type === 'MATH') {
-    if (mimeType === 'application/x-latex') {
-      exports['application/x-latex'] = res;
-    }
-    if (mimeType === 'application/mathml+xml') {
-      exports['application/mathml+xml'] = res;
-    }
-    if (mimeType === 'application/mathofficeXML') {
-      exports['application/mathofficeXML'] = res;
-    }
-  }
+  exports[mimeType] = res;
   return exports;
 }
 
@@ -12836,18 +12815,21 @@ function getAvailableLanguageList(configuration) {
 
 var MyScript = {
   Constants: Constants,
-  LoggerConfig: log,
-  Editor: Editor,
+  // Default instantiations
   DefaultConfiguration: defaultConfiguration,
+  DefaultBehaviors: defaultBehaviors,
   DefaultPenStyle: defaultPenStyle,
   DefaultTheme: defaultTheme,
+  // Helper functions
   register: register,
   getAvailableLanguageList: getAvailableLanguageList,
-  DefaultBehaviors: defaultBehaviors,
+  // Internals
+  LoggerConfig: log,
+  Editor: Editor,
   InkModel: InkModel,
   RecognizerContext: RecognizerContext
 };
 
 export default MyScript;
-export { Constants, log as LoggerConfig, Editor, defaultConfiguration as DefaultConfiguration, defaultPenStyle as DefaultPenStyle, defaultTheme as DefaultTheme, register, getAvailableLanguageList, defaultBehaviors as DefaultBehaviors, InkModel, RecognizerContext };
+export { Constants, defaultConfiguration as DefaultConfiguration, defaultBehaviors as DefaultBehaviors, defaultPenStyle as DefaultPenStyle, defaultTheme as DefaultTheme, register, getAvailableLanguageList, log as LoggerConfig, Editor, InkModel, RecognizerContext };
 //# sourceMappingURL=myscript.esm.js.map

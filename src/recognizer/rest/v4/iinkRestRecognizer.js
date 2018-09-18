@@ -145,32 +145,7 @@ function buildData(recognizerContext, model, conversionState) {
 
 function extractExports(configuration, mimeType, res) {
   const exports = {};
-  if (mimeType === 'application/vnd.myscript.jiix') {
-    exports['application/vnd.myscript.jiix'] = res;
-  }
-  if (configuration.recognitionParams.type === 'TEXT' && mimeType === 'text/plain') {
-    exports['text/plain'] = res;
-  } else if (configuration.recognitionParams.type === 'DIAGRAM') {
-    if (mimeType === 'image/svg+xml') {
-      exports['image/svg+xml'] = res;
-    }
-    if (mimeType === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
-      exports['application/vnd.openxmlformats-officedocument.presentationml.presentation'] = res;
-    }
-    if (mimeType === 'application/vnd.microsoft.art-gvml-clipformat') {
-      exports['application/vnd.microsoft.art-gvml-clipformat'] = res;
-    }
-  } else if (configuration.recognitionParams.type === 'MATH') {
-    if (mimeType === 'application/x-latex') {
-      exports['application/x-latex'] = res;
-    }
-    if (mimeType === 'application/mathml+xml') {
-      exports['application/mathml+xml'] = res;
-    }
-    if (mimeType === 'application/mathofficeXML') {
-      exports['application/mathofficeXML'] = res;
-    }
-  }
+  exports[mimeType] = res;
   return exports;
 }
 
