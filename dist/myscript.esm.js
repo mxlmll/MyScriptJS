@@ -5486,7 +5486,7 @@ function xhr(type, url, data) {
       request.setRequestHeader('Content-Type', 'application/json');
     }
 
-    var isBlobType = mimeType === pptxMimeType || mimeType.startsWith('image/');
+    var isBlobType = mimeType === pptxMimeType || mimeType.startsWith('image/png') || mimeType.startsWith('image/jpeg');
     if (isBlobType) {
       request.responseType = 'blob';
     }
