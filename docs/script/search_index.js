@@ -732,6 +732,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "myscript/src/eastereggs/inkimporter.js~importstrokegroups",
+    "function/index.html#static-function-importStrokeGroups",
+    "<span>importStrokeGroups</span> <span class=\"search-result-import-path\">myscript/src/eastereggs/InkImporter.js</span>",
+    "function"
+  ],
+  [
     "myscript/src/recognizer/websocket/v4/cdkv4wsiinkrecognizer.js~import_",
     "function/index.html#static-function-import_",
     "<span>import_</span> <span class=\"search-result-import-path\">myscript/src/recognizer/websocket/v4/Cdkv4WSIInkRecognizer.js</span>",
@@ -1585,13 +1591,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/editor.js~editor#configuration",
-    "class/src/Editor.js~Editor.html#instance-set-configuration",
+    "class/src/Editor.js~Editor.html#instance-get-configuration",
     "src/Editor.js~Editor#configuration",
     "member"
   ],
   [
     "src/editor.js~editor#configuration",
-    "class/src/Editor.js~Editor.html#instance-get-configuration",
+    "class/src/Editor.js~Editor.html#instance-set-configuration",
     "src/Editor.js~Editor#configuration",
     "member"
   ],
@@ -1642,6 +1648,12 @@ window.esdocSearchIndex = [
     "class/src/Editor.js~Editor.html#instance-get-exports",
     "src/Editor.js~Editor#exports",
     "member"
+  ],
+  [
+    "src/editor.js~editor#forcechange",
+    "class/src/Editor.js~Editor.html#instance-method-forceChange",
+    "src/Editor.js~Editor#forceChange",
+    "method"
   ],
   [
     "src/editor.js~editor#getstats",
@@ -1723,25 +1735,25 @@ window.esdocSearchIndex = [
   ],
   [
     "src/editor.js~editor#penstyle",
-    "class/src/Editor.js~Editor.html#instance-set-penStyle",
-    "src/Editor.js~Editor#penStyle",
-    "member"
-  ],
-  [
-    "src/editor.js~editor#penstyle",
     "class/src/Editor.js~Editor.html#instance-get-penStyle",
     "src/Editor.js~Editor#penStyle",
     "member"
   ],
   [
-    "src/editor.js~editor#penstyleclasses",
-    "class/src/Editor.js~Editor.html#instance-get-penStyleClasses",
-    "src/Editor.js~Editor#penStyleClasses",
+    "src/editor.js~editor#penstyle",
+    "class/src/Editor.js~Editor.html#instance-set-penStyle",
+    "src/Editor.js~Editor#penStyle",
     "member"
   ],
   [
     "src/editor.js~editor#penstyleclasses",
     "class/src/Editor.js~Editor.html#instance-set-penStyleClasses",
+    "src/Editor.js~Editor#penStyleClasses",
+    "member"
+  ],
+  [
+    "src/editor.js~editor#penstyleclasses",
+    "class/src/Editor.js~Editor.html#instance-get-penStyleClasses",
     "src/Editor.js~Editor#penStyleClasses",
     "member"
   ],
@@ -1867,13 +1879,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/editor.js~editor#theme",
-    "class/src/Editor.js~Editor.html#instance-set-theme",
+    "class/src/Editor.js~Editor.html#instance-get-theme",
     "src/Editor.js~Editor#theme",
     "member"
   ],
   [
     "src/editor.js~editor#theme",
-    "class/src/Editor.js~Editor.html#instance-get-theme",
+    "class/src/Editor.js~Editor.html#instance-set-theme",
     "src/Editor.js~Editor#theme",
     "member"
   ],
@@ -1900,6 +1912,12 @@ window.esdocSearchIndex = [
     "class/src/Editor.js~Editor.html#instance-get-undoStackIndex",
     "src/Editor.js~Editor#undoStackIndex",
     "member"
+  ],
+  [
+    "src/editor.js~editor#unload",
+    "class/src/Editor.js~Editor.html#instance-method-unload",
+    "src/Editor.js~Editor#unload",
+    "method"
   ],
   [
     "src/editor.js~editor#waitforidle",

@@ -1,7 +1,7 @@
 {
-  "coverage": "90.07%",
-  "expectCount": 262,
-  "actualCount": 236,
+  "coverage": "90.18%",
+  "expectCount": 265,
+  "actualCount": 239,
   "files": {
     "src/model/RecognizerContext.js": {
       "expectCount": 8,
@@ -9,18 +9,17 @@
       "undocumentLines": []
     },
     "src/Editor.js": {
-      "expectCount": 64,
-      "actualCount": 55,
+      "expectCount": 66,
+      "actualCount": 58,
       "undocumentLines": [
+        453,
         448,
-        443,
-        527,
-        830,
-        810,
-        477,
-        1019,
-        628,
-        629
+        532,
+        815,
+        482,
+        1029,
+        633,
+        634
       ]
     },
     "src/recognizer/websocket/v4/Cdkv4WSIInkRecognizer.js": {
@@ -88,7 +87,7 @@
       "expectCount": 2,
       "actualCount": 1,
       "undocumentLines": [
-        188
+        196
       ]
     },
     "src/recognizer/rest/v3/Cdkv3RestTextRecognizer.js": {
@@ -206,14 +205,14 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "src/renderer/svg/stroker/QuadraticSVGStroker.js": {
-      "expectCount": 2,
-      "actualCount": 2,
-      "undocumentLines": []
-    },
     "src/renderer/canvas/symbols/StrokeSymbolCanvasRenderer.js": {
       "expectCount": 1,
       "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/renderer/svg/stroker/QuadraticSVGStroker.js": {
+      "expectCount": 2,
+      "actualCount": 2,
       "undocumentLines": []
     },
     "src/renderer/canvas/stroker/QuadraticCanvasStroker.js": {
@@ -241,17 +240,17 @@
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/recognizer/common/CdkCommonUtil.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
     "src/recognizer/common/v3/Cdkv3CommonShapeRecognizer.js": {
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
     },
     "src/recognizer/common/v3/Cdkv3CommonTextRecognizer.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/recognizer/common/CdkCommonUtil.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -287,9 +286,11 @@
       "undocumentLines": []
     },
     "src/eastereggs/InkImporter.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 1,
-      "undocumentLines": []
+      "undocumentLines": [
+        80
+      ]
     },
     "src/recognizer/rest/v3/Cdkv3RestRecognizerUtil.js": {
       "expectCount": 1,

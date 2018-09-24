@@ -11456,6 +11456,26 @@ function inkImporter(editorParam, strokes, delayBetweenStrokes, lastOneDelay) {
   play(actions, 0, delayBetweenStrokes);
 }
 
+function importStrokeGroups(editorParam, strokeGroups) {
+  var _ref;
+  var rawStrokes = (_ref = []).concat.apply(_ref, toConsumableArray(strokeGroups.map(function (strokeGroup) {
+    return strokeGroup.strokes;
+  })));
+
+  strokeGroups.forEach(function (group) {
+    group.strokes.forEach(function (strokeFromGroup) {
+      addStroke(editorParam.model, strokeFromGroup);
+      addStrokeToGroup(editorParam.model, strokeFromGroup, group.penStyle);
+    });
+  });
+  editorParam.renderer.drawModel(editorParam.rendererContext, editorParam.model, editorParam.stroker);
+}
+
+var eastereggs = /*#__PURE__*/Object.freeze({
+  inkImporter: inkImporter,
+  importStrokeGroups: importStrokeGroups
+});
+
 /* eslint-disable no-underscore-dangle */
 
 /**
@@ -12113,6 +12133,13 @@ var Editor = function () {
         launchExport(this, this.model);
       }
     }
+
+    /**
+     * @Deprecated
+     * @param rawStrokes
+     * @param strokeGroups
+     */
+
   }, {
     key: 'reDraw',
     value: function reDraw(rawStrokes, strokeGroups) {
@@ -12368,10 +12395,19 @@ var Editor = function () {
       }
     }
 
+    /**
+     * Trigger the change callbacks (and by default send a change event).
+     */
+
+  }, {
+    key: 'forceChange',
+    value: function forceChange() {
+      triggerCallbacks(this, undefined, Constants.EventType.CHANGED);
+    }
+
     /* eslint-disable class-methods-use-this */
     /**
      * Get access to some easter egg features link ink injection. Use at your own risk (less tested and may be removed without notice).
-     * @returns {{inkImporter: inkImporter}}
      */
 
   }, {
@@ -12761,7 +12797,7 @@ var Editor = function () {
   }, {
     key: 'eastereggs',
     get: function get$$1() {
-      return { inkImporter: inkImporter };
+      return eastereggs;
     }
     /* eslint-enable class-methods-use-this */
 
