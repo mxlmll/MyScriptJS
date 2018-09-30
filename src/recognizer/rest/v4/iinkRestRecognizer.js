@@ -135,9 +135,7 @@ function buildData(recognizerContext, model, conversionState) {
     data.width = recognizerContext.editor.domElement.clientWidth;
   }
 
-  if (conversionState) {
-    data.conversionState = 'DIGITAL_EDIT';
-  }
+  data.conversionState = conversionState;
 
   InkModel.updateModelSentPosition(model);
   return data;
